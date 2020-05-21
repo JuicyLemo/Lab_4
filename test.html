@@ -4,7 +4,6 @@
 <head>
 	 <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
 	 <title>Gamedev</title>
-	 <script defer src="Script.js"></script>
 	 <link href="styletest.css" rel="stylesheet">
 	 <link rel="icon" href="Logo.jpg" type="images/png">
 	
@@ -12,24 +11,23 @@
 
 <body class="body_text">
 
- <header>
-	 <nav class="container"> 
+<header>
+	<nav class="container"> 
 		<a href="https://vk.com/id94383054" class="logo"> <!-- Логотип с ссылкой на главную -->
 		<div>
 		   <img src="Logo.jpg" class="img" height="120px" width="120px"/>
 	   </div>
 		</a>
-		<div style="text-align: center;"><h1>Разный левел-дизайн для разных жанров</h1></div>
-		 <ul class="menu"> 
-			Содержание:
-			 <li><a href="#horor">Хорор</a></li> <!-- Ссылка 1 -->
-			 <li><a href="#stels">Стелс-экшен</a></li> <!-- Ссылка 2em и т.д. -->
-			 <li><a href="#shooter">Онлайн-шутер</a></li>
-		 </ul>
-		 
+		<span style="margin-right: 28%;"><h1>Левел-дизайн для разных жанров</h1></span>
+	</nav> <!-- Конец меню -->
+	
+</header> <!-- Конец шапки -->
 
- 	</nav> <!-- Конец меню -->
- </header> <!-- Конец шапки -->
+<div id="menu">
+	<a href="#horor">Хорор</a>
+	<a href="#stels">Стелс-экшен</a>
+	<a href="#shooter">Онлайн-шутер</a>
+</div>
  
  <div class="main_ground">
 	 <div class="text"> <!--Блок раздела страницы с общей информацией -->
@@ -588,20 +586,28 @@
  		<div class="col-three"> 
 				 <p><a href="https://vk.com/id94383054" target="_blank">Автор вёрстки</a></p><br>
 				 <dialog>
-					 <p>
+					<p>
 						 Имя<br>
 					 	<input placeholder="Ваше имя">
 					</p>
-					 <p>
+					<p>
 						 e-mail<br>
 						 <input  placeholder="Ваш e-mail">
 					</p>
+					 <input type="checkbox" id="checkbox1" style="width: 20px;">
+					 <span style="font-size: 13pt;">Обработка персональных данных</span><br>
+					
+					 <input type="checkbox" id="checkbox2" style="width: 20px;">
+					 <span style="font-size: 13pt;">Информация о конфиденциальности</span><br>
+
 					 <button id="btn_close">Закрыть</button>
-					 <button>Отправить</button>
+					 <button id="btn_send" disabled="disabled">Отправить</button>
 				 </dialog>
 				 <button id="btn_open" class="open">Обратная связь</button>
  		</div>
  	</div>
  </footer>
 </body>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script defer src="Script.js"></script>
 </html>
