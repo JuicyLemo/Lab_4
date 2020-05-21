@@ -1,230 +1,79 @@
-.col-three {
-	width: 33%; /* изменение ширины объекта */
-    text-align: center; /* выравнивание текста по центру */
-	}
-.menu {
-	float: right;
-	}
-.logo {
-	float: left; 
-	padding: 1em; /* устанавливает отступы с внутренней стороны рамки */
-	}
-.container {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin: 0 auto; /* устанавливает величину отступа от каждого края элемента */
-	width: 100%; 
-	max-width: 58em; /* максимальный лимит ширины */
-	}
-footer {
-	margin-top: 10px;
-	height: 70px; /* изменение высоты объекта */
-	line-height: 30px; /* изменение межстрочного интервала */
-	}
-.text {
-	margin-left: 5%;
-	width: 90%;
-	}
-.back {
-	padding-left: 1rem;
-	padding-bottom: 1rem;
-	padding-top: 1rem;
-	
-	background: #bce3f5; /* устанавливает цвет фона объекта */
-	}
-.main_ground {
-	margin-top: 1%;
-	display: flex;
-	flex-direction: column;
-	
-	font-family: Geneva, Arial, Helvetica, sans-serif; /* устанавливает семейство шрифта */
-	background: #dae9f0;
-	width: 85%;
-	margin-left: 7.5%;
-	
-	}
-.body_text {
-	font-size: 14pt; /* определяет размер шрифта элемента */
-	}
-.quotes {
-	font-weight: 100; /* устанавливает насыщенность шрифта */
-	font-size: 16pt;
-	}
-.signatures{
-	font-size: 12pt;
-	}
-.move{
-	background-color: rgba(253, 242, 92, 0.863);
-	margin-left: 21%;
-	width: 58%;
-	}
+var bookmarkBtn = document.querySelectorAll('.bookmark'); //объявляев переменную bookmarkBtn и присваиваем ей значение элемента, в который содержит класс bookmark
 
-.img-1{
-	height:350px; 
-	width: 654px;
+$( document ).ready(function() { //проверка на готовность страницы
+  $('.bookmark').click(function (e) { //при нажатии на элемент с классом bookmark происходит вызов функции
+    e.preventDefault(); 
+   $(this).toggleClass('added'); //данному элементу, по которому было произведено нажатие добовляет новый класс added
+    var parentId = $(this).parent().attr("id"); // объявление переменной parentId которой присваивается родительский атрибут id
+    var bookMarks = $('.bookmark-list'); //возвращает первый элемент документа с классом .bookmark-list
+    if($(this).hasClass('added')) { //если элемен, по котрому было произведено нажатие уже имеет класс added, то выполняется следующее
+      $(this).text("Удалить из закладок"); //тект у данного элемента меняется на "Удалить из закладок"
+      var text = $('#' + parentId +' h2').text();
+      $('<a>', { href: '#' + parentId, text: text}).appendTo(bookMarks); //в конец блока bookMarks добавляет тег <a> со следующими атрибутами { href: '#' + parentId, text: text}
+   } else { //при невыполнении оператора условия, происходит следуещее
+     $(this).text("Добавить в закладки"); //текст у данного элемента меняется на "Дабавить в закладки"
+      $('a[href="#'+ parentId +'"]').remove(); //происходит удаление тега <a> с атрибутами [href="#'+ parentId +'"]
+      }
+  });
+});
+
+var dialog = document.querySelector('dialog');
+document.querySelector('#btn_open').onclick = function() {
+  dialog.showModal();
+};
+document.querySelector('#btn_close').onclick = function() {
+  dialog.close();
+};
+
+
+function showArticleF(e) {
+
+  showArticle = e.currentTarget
+  let parent = showArticle.parentElement;
+
+  let articleText = parent.getElementsByClassName("article__text")[0]
+
+  articleText.classList.toggle("show");
+
+  if (showArticle.innerText == "Показать статью") {
+      showArticle.innerHTML = "Скрыть статью"
+
+  } 
+  else {
+      showArticle.innerHTML = "Показать статью"
+  }
+
 }
 
-header{
-	margin-left: 7.5%;
-	text-align: center;
-	font-family: Geneva, Arial, Helvetica, sans-serif;
-	width: 85%;
-	height: 162px;
-	background-color: rgb(26, 167, 148);
+let showArticle = document.getElementsByClassName("btn-show")
+for (let i = 0; i < showArticle.length; i++) {
+
+  showArticle[i].addEventListener("click", showArticleF)
+
 }
 
-/* Лабораторная №4 */
-.bookmark {
-	color: #00AC6B;
-   }
-.added {
-	color: #FF4F00;
-   }
-.bookmark-list a {
-	margin-right: 50px;
-   }
+// -------- Лабораторная №5 -------- 
 
-.open {
-	width: 125px;
-	height: 37px;
-	background-color: rgba(253, 242, 92, 0.863);
-	color: royalblue;
-	border: none;
-	border-radius: 20px;
-	font-size: 15px;
-	margin-bottom: 10px;
-}
+  $(document).ready(function() {
+    $(window).scroll (function(){
+        if ($(document).scrollTop() > $("header").height()+9)
+        {
+            $("#menu").addClass("fixed");
+        } else {
+            $("#menu").removeClass("fixed");
+        }
+    });
+});
 
-dialog {
-	text-align: left;
-	width: 320px;
-	height: 300px;
-	border-radius: 10px;
-	border-color: royalblue;
-	position: fixed;
-}
+$('#checkbox1').click(function(){
+	if ($(this).is(':checked')){
+    $('#checkbox2').click(function(){
+    if ($(this).is(':checked')){
+		  $('#btn_send').removeAttr('disabled');
+	    } else {
+		  $('#btn_send').attr('disabled', 'disabled'); 
+    }
+    });
+  } else {$('#btn_send').attr('disabled', 'disabled'); }
+});
 
-input {
-	width: 80%;
-	height: 20px;
-	margin-top: 5px;
-}
-
-.btn-show {
-	width: 125px;
-	height: 37px;
-	background-color: royalblue;
-	color: rgba(253, 242, 92, 0.863);
-	border: none;
-	border-radius: 20px;
-	font-size: 15px;
-	margin-top: 10px;
-	display: block;
-}
-
-.article__text {
-	display: none;
-}
-
-.show {
-display: block;
-}
-
-.open:hover, .btn-show:hover {
-    cursor: pointer;
-}
- /* ---------------- */
-
-/* Лабораторная №5 */
-
-.fixed {
-	position: fixed;
-	top: 0;
-	opacity: 0.95;
-}
-
-#menu{
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	margin-left: 7.5%;
-	font-family: Geneva, Arial, Helvetica, sans-serif;
-	width: 1133px;
-	height: 37px;
-	background-color: dodgerblue;
-}
-	@media (max-width: 1024px){
-		.move{
-			background-color: rgba(253, 242, 92, 0.863);
-			margin-left: 17%;
-			width: 66%;
-			}
-		.img-1{
-			height: 100%;
-			width: 562px;
-		}
-		.col-three {
-			
-			margin-left: 7.5%;
-			}
-	}
-
-	@media (max-width: 768px) {
-		/* Ширину класса container делаем резиновой */
-		.container {
-			max-width: 100%;
-			display: flex;
-			}
-			
-			.menu {
-				float: none;
-				text-align: left;
-			}
-			.move{
-			   background-color: rgba(253, 242, 92, 0.863);
-			   margin-left: 15%;
-			   width: 70%;
-			   }
-   
-			.img-1{
-				height: 100%;
-				width: 444px;
-			}
-   
-			}
-
-	@media (max-width: 480px) {
-		/* Ширину класса container делаем резиновой */
-		 .container {
-		 max-width: 100%;
-		 display: flex;
-		 flex-direction: column;
-		 }
-		 .logo {
-			 float: none;
-		 }
-		 .menu {
-			 float: none;
-			 text-align: left;
-		 }
-		 .move{
-			background-color: rgba(253, 242, 92, 0.863);
-			width: 100%;
-			margin-left: auto;
-			}
-
-		 .img-1{
-			 height: 100%;
-			 width: 390px;
-		 }
-		 
-		/* Расположение блоков в footer делаем в одну колонку */
-		 .col-three {
-		 float: none;
-		 width: 100%;
-		 text-align: center;
-		 }
-	}
-	
-	
